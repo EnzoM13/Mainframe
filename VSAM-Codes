@@ -67,3 +67,44 @@ COMANDO REPRO
 	REPRO INFILE(PSFILE) -
 	OUTFILE(XDSFILE)
 /*
+
+AIX
+
+
+//STEP1    EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//SYSIN    DD *
+	DEFINE AIX(NAME(NOMBRE.DEL.KSDS.NOMBREAIX) -
+	RELATE(NOMBRE.DEL.KSDS) -
+	KEYS(X X)               - 
+	RECSZ(X X)              - 	
+	FREESPACE(X X)          -
+	TRACKS(X X)	        -
+	CISZ(X)	                -
+	VOLUME(X)	        -
+	UNIQUEKEY/NONUNIQUEKEY  -
+	UPGRADE/NONUPGRADE) 
+/*
+
+Para definir un path del aix debemos:
+
+//STEP2    EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//SYSIN    DD *
+	DEFINE PATH(NAME(NOMBRE.DEL.KSDS.NOMBREAIX.PATH) -
+	PATHENTRY(NOMBRE.DEL.KSDS.NOMBREAIX)		 -
+/*
+Se puede hacer en la misma job card que la creación del AIX
+
+Para construir el nuevo index debemos: (sirve para poner la data en el AIX)
+//STEP3    PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//SYSIN    DD *
+	BLDINDEX	                        -	
+	INDATASET(NOMBRE.DEL.KSDS)	        -	
+	OUTDATASET(NOMBRE.DEL.KSDS.NOMBREAIX)	
+/*
+	 
