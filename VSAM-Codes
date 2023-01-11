@@ -1,0 +1,69 @@
+CREACIÓN DE ARCHIVOS VSAM
+
+//KSDSJOB  JOB  CLASS=A,MSGCLASS=A,MSGLEVEL=(1,1),PRTY=15,NOTIFY=&SYSUID
+//STEP1    EXEC PGM=IDCAMS
+//SYSPRINT DD   SYSOUT=*
+//SYSIN    DD   *
+           DEFINE CLUSTER(
+           NAME(NOMBRE.DEL.KSDS)-
+           INDEXED             -
+           RECSZ(90 200)       -
+           CISZ(8192)          -
+           KEYS(5 0)           -
+           FREESPACE(10 20)    -
+           TRACKS(100 100)     -
+           VOLUME(ZASYS1)
+/*
+
+//ESDSJOB  JOB  CLASS=A,MSGCLASS=A,MSGLEVEL=(1,1),PRTY=15,NOTIFY=&SYSUID
+//STEP1    EXEC PGM=IDCAMS
+//SYSPRINT DD   SYSOUT=*
+//SYSIN    DD   *
+           DEFINE CLUSTER(
+           NAME(NOMBRE.DEL.ESDS)-
+           NONINDEXED          -
+           RECSZ(90 200)       -
+           CISZ(8192)          -
+           FREESPACE(10 20)    -
+           TRACKS(100 100)     -
+           VOLUME(ZASYS1))
+/*
+
+//RRDSJOB  JOB  CLASS=A,MSGCLASS=A,MSGLEVEL=(1,1),PRTY=15,NOTIFY=&SYSUID
+//STEP1    EXEC PGM=IDCAMS
+//SYSPRINT DD   SYSOUT=*
+//SYSIN    DD   *
+           DEFINE CLUSTER(
+           NAME(NOMBRE.DEL.RRDS)-
+           NUMBERED            -
+           RECSZ(90 200)       -
+           CISZ(8192)          -
+           FREESPACE(10 20)    -
+           TRACKS(100 100)     -
+           VOLUME(ZASYS1))
+/*
+
+//LDSJOB  JOB  CLASS=A,MSGCLASS=A,MSGLEVEL=(1,1),PRTY=15,NOTIFY=&SYSUID
+//STEP1    EXEC PGM=IDCAMS
+//SYSPRINT DD   SYSOUT=*
+//SYSIN    DD   *
+           DEFINE CLUSTER(
+           NAME(NOMBRE.DEL.LDS)-
+           LINEAR              -
+           CISZ(8192)          -
+           TRACKS(100 100)     -
+           VOLUME(ZASYS1))
+/*
+
+COMANDO REPRO
+
+//REPROJOB  JOB  CLASS=A,MSGCLASS=A,MSGLEVEL=(1,1),PRTY=15,NOTIFY=&SYSUID
+/STEP1      EXEC PGM=IDCAMS
+//SYSPRINT  DD SYSOUT=*
+//SYSOUT    DD SYSOUT=*
+//PSFILE    DD DISP=SHR,DNS=NOMBRE.DATA.SET
+//KSDSFILE  DD DISP=SHR,DSN=NOMBRE.DEL.XDS
+//SYSIN DD *
+	REPRO INFILE(PSFILE) -
+	OUTFILE(XDSFILE)
+/*
