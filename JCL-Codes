@@ -27,3 +27,13 @@ Y para agregar una nueva generación:
 //SYSIN DD *
 	SORT FIELDS(1,5,CH,A)
 /*
+
+//PASO1    EXEC PGM=IEBGENER 
+//SYSPRINT DD SYSOUT=*
+//SYSUT1   DD DSN=XXX.XXXX.XXXX,DISP=SHR
+//SYSUT2   DD DSN=XXX.XXX.XXX,
+//            DISP=(NEW,CATLG,DELETE),UNIT=SYSDA,
+//            SPACE=(TRK,(1,1),RLSE),
+//            DCB=(RECFM=FB,LRECL=80,BLKSIZE=0)
+//SYSIN    DD DUMMY   DUMMY 
+/*
