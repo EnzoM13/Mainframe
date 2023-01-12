@@ -212,7 +212,7 @@ IEBEDIT
 
 IEBPTPCH
 
-IEBGENER Se usa para comer la informacion de un dataset secuencial a otro dataset, también es util para editar datsets, imprimir datasets secuenciales o miembros de un pds o crear un miembro de pds desde un dataset secuencial .
+ IEBGENER sirve para realizar copias de ficheros secuenciales, también es util para editar datsets, imprimir datasets secuenciales o miembros de un pds o crear un miembro de pds desde un dataset secuencial .
  
 SYSPRINT Es para mensajes
 SYSIN define el control de los statements para el programa
